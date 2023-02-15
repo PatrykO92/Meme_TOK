@@ -1,17 +1,21 @@
-import { Typography, CardMedia, Card, Stack, Button } from "@mui/material";
+import { Typography, CardMedia, Card, Stack } from "@mui/material";
 
 const MemeRender = ({ meme }) => {
+  console.log(meme);
+
+  if (meme.nsfw) return <div>NSFW</div>;
+
   return (
     <Card
       sx={{
-        maxHeight: "90vh",
         margin: "5px",
+        padding: "15px",
+        maxWidth: "1200px",
       }}
     >
       <Stack
         direction="row"
         spacing={2}
-        padding={1}
         sx={{
           maxHeight: "10vh",
         }}
@@ -27,26 +31,14 @@ const MemeRender = ({ meme }) => {
       </Stack>
       <CardMedia
         component="img"
-        alt="img"
+        alt={meme.title || "img"}
         sx={{
-          maxHeight: "75vh",
           width: "auto",
           maxWidth: "95%",
           margin: "auto",
         }}
         image={`${meme.url}`}
       />
-      <Stack
-        padding={1}
-        sx={{
-          maxHeight: "4vh",
-        }}
-        alignItems="center"
-      >
-        <Button variant="text" href={meme.postLink}>
-          Link
-        </Button>
-      </Stack>
     </Card>
   );
 };

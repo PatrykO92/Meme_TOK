@@ -11,7 +11,6 @@ function App() {
 
   const nextMeme = () => {
     fetchMeme().then((data) => setMeme(data));
-    console.log("Clicked");
   };
 
   useEffect(() => {
@@ -28,12 +27,17 @@ function App() {
       alignItems="center"
       justifyContent="center"
     >
-      <MemeRender meme={meme} />
-      <Stack spacing={2} direction="row">
-        <Button variant="contained" onClick={() => nextMeme()}>
-          Next!
+      <MemeRender justifySelf="center" alignSelf="flex-end" meme={meme} />
+      <Stack padding={2} spacing={2} direction="row">
+        <Button variant="outlined" href={meme.postLink} target="_blank">
+          Link
         </Button>
-        <Button variant="contained">Next!</Button>
+        <Button variant="contained" color="success">
+          Save
+        </Button>
+        <Button variant="contained" onClick={() => nextMeme()}>
+          Next
+        </Button>
       </Stack>
     </Stack>
   );
