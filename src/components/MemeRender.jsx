@@ -1,55 +1,53 @@
-import { fetchMeme } from "../utils";
-import { useEffect, useState } from "react";
+import { Typography, CardMedia, Card, Stack, Button } from "@mui/material";
 
-import { Box } from "@mui/system";
-import { Typography, CardMedia, Card } from "@mui/material";
-
-const MemeRender = () => {
-  const [meme, setMeme] = useState({});
-
-  useEffect(() => {
-    fetchMeme().then((data) => setMeme(data));
-  }, []);
-
-  useEffect(() => {
-    console.log(meme);
-  }, [meme]);
-
+const MemeRender = ({ meme }) => {
   return (
-    <Box
+    <Card
       sx={{
-        height: "90vh",
-        display: "flex",
-        flexDirection: "column",
+        maxHeight: "90vh",
+        margin: "5px",
       }}
     >
-      <Box
+      <Stack
+        direction="row"
+        spacing={2}
+        padding={1}
         sx={{
-          height: "5vh",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
+          maxHeight: "10vh",
         }}
+        alignItems="center"
+        justifyContent="space-between"
       >
-        <Typography>{meme.author}</Typography>
-        <Typography>
-          <a href={meme.postLink}>Meme Link</a>
+        <Typography gutterBottom variant="h5" component="div">
+          {meme.title}
         </Typography>
-      </Box>
-
+        <Typography variant="body2" color="text.secondary">
+          {meme.author}
+        </Typography>
+      </Stack>
       <CardMedia
         component="img"
         alt="img"
         sx={{
-          maxHeight: "85vh",
+          maxHeight: "75vh",
           width: "auto",
           maxWidth: "95%",
           margin: "auto",
-          boxShadow: "1px 1px 2px black",
         }}
         image={`${meme.url}`}
       />
-    </Box>
+      <Stack
+        padding={1}
+        sx={{
+          maxHeight: "4vh",
+        }}
+        alignItems="center"
+      >
+        <Button variant="text" href={meme.postLink}>
+          Link
+        </Button>
+      </Stack>
+    </Card>
   );
 };
 
