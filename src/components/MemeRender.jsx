@@ -1,9 +1,13 @@
+import { useState, useEffect } from "react";
+
 import { Typography, CardMedia, Card, Stack } from "@mui/material";
 
 const MemeRender = ({ meme }) => {
-  console.log(meme);
+  const [blured, setBlured] = useState(0);
 
-  if (meme.nsfw) return <div>NSFW</div>;
+  useEffect(() => {
+    if (meme.nsfw) setBlured("1.5rem");
+  }, [meme]);
 
   return (
     <Card
@@ -14,6 +18,7 @@ const MemeRender = ({ meme }) => {
       }}
     >
       <Stack
+        margin={1}
         direction="row"
         spacing={2}
         sx={{
@@ -22,9 +27,7 @@ const MemeRender = ({ meme }) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Typography gutterBottom variant="h5" component="div">
-          {meme.title}
-        </Typography>
+        <Typography variant="h5">{meme.title}</Typography>
         <Typography variant="body2" color="text.secondary">
           {meme.author}
         </Typography>
@@ -36,8 +39,13 @@ const MemeRender = ({ meme }) => {
           width: "auto",
           maxWidth: "95%",
           margin: "auto",
+          border: "1px solid black",
+          filter: `blur(${blured})`,
         }}
         image={`${meme.url}`}
+        onClick={() => {
+          setBlured("0");
+        }}
       />
     </Card>
   );
