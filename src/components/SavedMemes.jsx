@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
-
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import ListSubheader from "@mui/material/ListSubheader";
 import IconButton from "@mui/material/IconButton";
 import ImageList from "@mui/material/ImageList";
-const SavedMemes = (memes) => {
-  const memesList = memes.memes;
-  memesList.map((item) => console.log(item));
-  return (
+import { Box } from "@mui/system";
+
+import { useState } from "react";
+
+import { MemeRender } from "./";
+
+const SavedMemes = ({ memes }) => {
+  return memes.length === 0 ? (
+    <Box>You didn't added any memes yet!</Box>
+  ) : (
     <ImageList sx={{ width: "75vw", height: "75vh" }}>
-      {memesList.map((item) => (
+      {memes.map((item) => (
         <ImageListItem
           key={item.url}
           sx={{ margin: "5px", border: "1px solid green" }}

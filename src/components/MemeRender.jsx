@@ -14,7 +14,7 @@ const MemeRender = ({ meme }) => {
       sx={{
         margin: "5px",
         padding: "15px",
-        maxWidth: "1200px",
+        maxWidth: "1400px",
       }}
     >
       <Stack
@@ -38,8 +38,9 @@ const MemeRender = ({ meme }) => {
         sx={{
           width: "auto",
           maxWidth: "95%",
+          maxHeight: "1000px",
           margin: "auto",
-          border: "1px solid black",
+          border: "1px solid green",
           filter: `blur(${blured})`,
         }}
         image={`${meme.url}`}
