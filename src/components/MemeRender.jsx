@@ -30,7 +30,9 @@ const MemeRender = ({ meme }) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Typography variant="h5">{meme.title}</Typography>
+        <Typography variant="h5" sx={{ fontSize: "1rem" }}>
+          {meme.title}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           {meme.author}
         </Typography>
