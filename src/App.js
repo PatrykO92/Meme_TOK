@@ -25,19 +25,25 @@ const style = {
 };
 
 function App() {
-  const [text, setText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
+  const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
 
   const [actualPage, setActualPage] = useState("");
   const [savedMemes, setSavedMemes] = useState([]);
+
   const [meme, setMeme] = useState({});
 
   const handleClose = () => setOpen(false);
 
   const randomMeme = () => {
+    setIsLoading(true);
     setActualPage("main");
-    fetchMeme().then((data) => setMeme(data));
+    fetchMeme().then((data) => {
+      setMeme(data);
+      setIsLoading(false);
+    });
   };
 
   const saveMeme = () => {
@@ -49,6 +55,7 @@ function App() {
       setOpen(true);
       return;
     }
+
     setText("Meme added to list!");
     setOpen(true);
     setSavedMemes((oldMemes) => [...oldMemes, meme]);
@@ -81,11 +88,15 @@ function App() {
           <Route
             path="/"
             element={
-              <MemeRender
-                justifySelf="center"
-                alignSelf="flex-end"
-                meme={meme}
-              />
+              isLoading ? (
+                <Loader />
+              ) : (
+                <MemeRender
+                  justifySelf="center"
+                  alignSelf="flex-end"
+                  meme={meme}
+                />
+              )
             }
           />
           <Route
@@ -94,15 +105,21 @@ function App() {
           />
         </Routes>
         <Stack padding={2} spacing={2} direction="row">
-          {actualPage == "main" && (
+          {actualPage === "main" && (
             <>
-              <Button variant="outlined" href={meme.postLink} target="_blank">
+              <Button
+                variant="outlined"
+                href={meme.postLink}
+                target="_blank"
+                disabled={isLoading}
+              >
                 Link
               </Button>
               <Button
                 variant="contained"
                 color="success"
                 onClick={() => saveMeme()}
+                disabled={isLoading}
               >
                 Save meme
               </Button>
@@ -113,6 +130,7 @@ function App() {
             <Button
               variant="contained"
               color="success"
+              disabled={isLoading}
               onClick={() => {
                 setActualPage("memes");
               }}
@@ -121,7 +139,11 @@ function App() {
             </Button>
           </Link>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <Button variant="contained" onClick={() => randomMeme()}>
+            <Button
+              variant="contained"
+              onClick={() => randomMeme()}
+              disabled={isLoading}
+            >
               Random Meme
             </Button>
           </Link>
