@@ -4,10 +4,6 @@ import IconButton from "@mui/material/IconButton";
 import ImageList from "@mui/material/ImageList";
 import { Box } from "@mui/system";
 
-import { useState } from "react";
-
-import { MemeRender } from "./";
-
 const SavedMemes = ({ memes }) => {
   return memes.length === 0 ? (
     <Box>You didn't added any memes yet!</Box>
