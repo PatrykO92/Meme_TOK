@@ -28,4 +28,4 @@ This project does not have a license.
 
 ## Live Version
 
-You can view a live version of this app at [meme-tok.netlify.app](meme-tok.netlify.app).
+You can view a live version of this app at [https://meme-tok.netlify.app/](https://meme-tok.netlify.app/).
